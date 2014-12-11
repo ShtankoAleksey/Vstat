@@ -1,4 +1,4 @@
-package project.com.vstat;
+package shtanko.com.vstat;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
