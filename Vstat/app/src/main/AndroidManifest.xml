@@ -20,6 +20,8 @@
             android:name=".ShowData"
             android:label="@string/title_activity_show_data" >
         </activity>
+
+
     </application>
 
 </manifest>
