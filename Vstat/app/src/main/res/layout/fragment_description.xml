@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textView"
+        android:id="@+id/channel_name"
         android:layout_gravity="top|center_horizontal" />
 
 </LinearLayout>
