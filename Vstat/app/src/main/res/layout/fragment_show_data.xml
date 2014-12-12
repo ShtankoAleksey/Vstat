@@ -7,9 +7,8 @@
     tools:context="shtanko.com.vstat.ShowData$PlaceholderFragment">
 
     <ImageView
-    android:id="@+id/imageVIew"
+    android:id="@+id/ch_image"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_launcher"/>
+    android:layout_height="wrap_content"/>
 
 </RelativeLayout>

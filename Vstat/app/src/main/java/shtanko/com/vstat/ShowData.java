@@ -1,17 +1,22 @@
 package shtanko.com.vstat;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -19,15 +24,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
 public class ShowData extends ActionBarActivity {
+//
+    TextView ch_name;
+    String data = "";
+  //
 
-    TextView name;
+    ImageView channel_image;
+
+    String image_url = "http://yt3.ggpht.com/-vAC58B_yhTM/AAAAAAAAAAI/AAAAAAAAAAA/priWH4ueUBA/s88-c-k-no/photo.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +51,20 @@ public class ShowData extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        name = (TextView)findViewById(R.id.channel_name);
+        Intent i = getIntent();
+        data = i.getStringExtra("username");
+
+        new ParseTask().execute();
+
+        ch_name = (TextView) findViewById(R.id.channel_name);
+        //channel_image = (ImageView)findViewById(R.id.ch_image);
+//        new DownloadImageTask((ImageView) findViewById(R.id.ch_image))
+//                .execute(image_url);
+
+
     }
 
 
@@ -89,6 +114,23 @@ public class ShowData extends ActionBarActivity {
             return rootView;
         }
     }
+
+    //Class for information
+    public static class InformationFragment extends Fragment {
+
+
+        public InformationFragment() {
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_information, container, false);
+            return rootView;
+        }
+    }
+
     //Class Json Parser
     private class ParseTask extends AsyncTask<Void, Void, String> {
 
@@ -158,10 +200,13 @@ public class ShowData extends ActionBarActivity {
 
                 JSONObject photoJSONObject = entryJSONObject.getJSONObject("media$thumbnail");
                 photo = photoJSONObject.getString("url");
-                //Log.d(LOG_TAG, "Photo: " + photo);
 
+                new DownloadImageTask((ImageView) findViewById(R.id.ch_image))
+                        .execute(photo);
 //                tw.setText($t);
-//                tw2.setText(name);
+                ch_name.setText(name);
+                //
+
 //                tw3.setText(location);
 //                tw4.setText(subscriberCount);
 //                tw5.setText(totalUploadViews);
@@ -181,5 +226,30 @@ public class ShowData extends ActionBarActivity {
 
     }
 
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
 }

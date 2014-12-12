@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
@@ -45,7 +46,9 @@ public class Main extends ActionBarActivity implements OnClickListener {
         switch (v.getId()) {
             case R.id.go:
 // TODO Call second activity
+                EditText enter_name = (EditText) findViewById(R.id.enter_name);
                 Intent intent = new Intent(this, ShowData.class);
+                intent.putExtra("username", enter_name.getText().toString());
                 startActivity(intent);
                 break;
             default:

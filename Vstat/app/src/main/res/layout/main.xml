@@ -9,9 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="IsoPanzer"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/enter_name"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Go"
         android:id="@+id/go"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/enter_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp" />
 </RelativeLayout>
