@@ -1,5 +1,6 @@
 package shtanko.com.vstat;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,7 @@ public class ShowData extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Class for imageView
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -55,4 +57,22 @@ public class ShowData extends ActionBarActivity {
             return rootView;
         }
     }
+
+    //
+    public static class DescriptionFragment extends Fragment {
+
+
+        public DescriptionFragment() {
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_description, container, false);
+            return rootView;
+        }
+    }
+
+
 }
